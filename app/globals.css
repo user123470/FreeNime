@@ -1,0 +1,4 @@
+@tailwind base; @tailwind components; @tailwind utilities;
+:root { color-scheme: dark; }
+body { @apply bg-bg text-neutral-100 antialiased pb-24 md:pb-0 md:pl-56; }
+.skeleton { @apply animate-pulse bg-line rounded-xl; }
