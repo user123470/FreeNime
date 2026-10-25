@@ -1,3 +1,4 @@
+import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createClient, createServiceClient } from '@/lib/supabase/server';
 import { anilist } from '@/lib/providers';
@@ -12,7 +13,6 @@ export async function POST(req: Request) {
   if (!parsed.success) return NextResponse.json({ error: 'invalid' }, { status: 400 });
   const { sourceId, kind, on } = parsed.data;
 
-  // pastikan anime ada di DB (upsert pakai service role, data berasal dari provider, bukan dari klien)
   const svc = createServiceClient();
   let { data: row } = await svc.from('anime').select('id').eq('source', 'anilist').eq('source_id', sourceId).maybeSingle();
   if (!row) {
